@@ -15,19 +15,19 @@
     "dtsSource": [
       "./custom_typings/**/*.d.ts"
     ],
-    "source": "src/**/*.ts"
+    "source": ["src/browser/**/*.ts", "src/shared/**/*.ts"]
   },
   "markupProcessor": {
     "id": "none",
     "displayName": "None",
     "fileExtension": ".html",
-    "source": "src/**/*.html"
+    "source": "src/browser/**/*.html"
   },
   "cssProcessor": {
     "id": "none",
     "displayName": "None",
     "fileExtension": ".css",
-    "source": "src/**/*.css"
+    "source": "src/browser/**/*.css"
   },
   "editor": {
     "id": "vscode",
@@ -78,8 +78,8 @@
         "name": "app-bundle.js",
         "source": {
           "include": [
-            "[**/*.js]",
-            "**/*.{css,html}"
+            "[src/browser/**/*.js, src/shared/**/*.js]",
+            "src/browser/**/*.{css,html}"
           ],
           "exclude": [
             "**/window/*.html"

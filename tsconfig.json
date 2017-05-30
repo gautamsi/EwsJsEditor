@@ -14,8 +14,9 @@
     "allowJs": true
   },
   "exclude": [
+    "src/browser/",
     "node_modules",
-    "aurelia_project",
-    "./index.js"
+    "aurelia_project"
+    //"./index.js"
   ]  
 }
