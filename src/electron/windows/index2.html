@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body aurelia-app="main" root="app2">
+<body aurelia-app="browser/main" root="app2">
   <script>
     window.nodeRequire = require;
     delete window.require;
     delete window.exports;
     delete window.module;
   </script>
-  <script src="dist/vendor-bundle.js" data-main="aurelia-bootstrapper"></script>
+  <script src="../scripts/vendor-bundle.js" data-main="aurelia-bootstrapper"></script>
 </body>
 
 </html>

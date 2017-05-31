@@ -1,4 +1,4 @@
-import { ipcChannelNames } from "../../ipc/ipcChannelNames";
+import { ipcChannelNames } from "../../shared/ipcChannelNames";
 import {ipcRenderer} from "electron";
 export class ipcBrocker{
     static channels: string[];

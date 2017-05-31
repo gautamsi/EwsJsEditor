@@ -32,6 +32,6 @@ export class MenuService {
     }
 
     private setFileMenu(fileMenu:Electron.Menu):void{
-        
+     
     }
 }

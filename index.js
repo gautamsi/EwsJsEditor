@@ -29,7 +29,7 @@ app.on('ready', function () {
     frame: true
   });
 
-  mainWindow.loadURL(isDev() ? 'http://localhost:9000/' : 'file://' + __dirname + '/index.html');
+  mainWindow.loadURL(isDev() ? 'http://localhost:9000/electron/index.html' : 'file://' + __dirname + '/dist/electron/index.html');
   //mainWindow.loadURL('http://localhost:9000');
 
   mainWindow.on('closed', function () {
@@ -37,18 +37,19 @@ app.on('ready', function () {
   });
 });
 
-ipcMain.on("openX", _ => {
+ipcMain.on("open", _ => {
   var main_width = 800;
   var main_height = 600;
 
   var childWindow = new BrowserWindow({
     width: main_width,
     height: main_height,
-    frame: true, webPreferences:{webSecurity: "off"}
+    frame: true, 
+    //webPreferences:{webSecurity: false}
   });
   childWindow  
 
-  childWindow.loadURL(isDev() ? 'http://localhost:9000/windows/index2.html' : 'file://' + __dirname + '/index2.html');
+  childWindow.loadURL(isDev() ? 'http://localhost:9000/electron/index2.html' : 'file://' + __dirname + '/dist/electron/index2.html');
   //childWindow.loadURL('http://localhost:9000/index2.html');
 
   childWindow.on('closed', function () {

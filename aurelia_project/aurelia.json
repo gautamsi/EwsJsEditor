@@ -1,12 +1,12 @@
 {
-  "name": "qu-ele-2",
+  "name": "EwsJsEditor",
   "type": "project:application",
   "platform": {
     "id": "web",
     "displayName": "Web",
     "output": "dist",
     "index": "index.html",
-    "baseDir": "."
+    "baseUrl": "dist/"
   },
   "transpiler": {
     "id": "typescript",
@@ -15,7 +15,10 @@
     "dtsSource": [
       "./custom_typings/**/*.d.ts"
     ],
-    "source": ["src/browser/**/*.ts", "src/shared/**/*.ts"]
+    "source": [
+      "src/browser/**/*.ts",
+      "src/shared/**/*.ts"
+    ]
   },
   "markupProcessor": {
     "id": "none",
@@ -50,13 +53,18 @@
       {
         "id": "web",
         "displayName": "Web",
-        "output": "dist",
-        "index": "index.html"
+        "output": "dist/scripts",
+        "index": "index.html",
+        "baseUrl": "../scripts"
+
       }
     ],
     "loader": {
       "type": "require",
       "configTarget": "vendor-bundle.js",
+      "config":{
+        "xbaseUrl":"src"
+      },
       "includeBundleMetadataInConfig": "auto",
       "plugins": [
         {
@@ -76,15 +84,10 @@
     "bundles": [
       {
         "name": "app-bundle.js",
-        "source": {
-          "include": [
-            "[src/browser/**/*.js, src/shared/**/*.js]",
-            "src/browser/**/*.{css,html}"
-          ],
-          "exclude": [
-            "**/window/*.html"
-          ]
-        }
+        "source": [
+          "**/*.js",
+          "**/*.{css,html}"
+        ]
       },
       {
         "name": "vendor-bundle.js",
@@ -143,9 +146,9 @@
         ]
       }
     ],
-    "_x_copyFiles-not-used": {
-      "index.html":"dist/",
-      "windows/*.html": "dist/windows/"
+    "copyFiles": {
+      "index.html": "dist/electron/",
+      "src/electron/windows/*.html": "dist/electron/"
     }
   }
 }

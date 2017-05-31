@@ -4,7 +4,7 @@ import environment from './environment';
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .feature('resources');
+    .feature('browser/resources');
 
   if (environment.debug) {
     aurelia.use.developmentLogging();
@@ -16,7 +16,7 @@ export function configure(aurelia: Aurelia) {
 
   aurelia.start().then((a) => {
     let root = a.host.getAttribute("root");
-    aurelia.setRoot("views/" + (root || "app"));
+    aurelia.setRoot("browser/views/" + (root || "app"));
   }
   );
 }

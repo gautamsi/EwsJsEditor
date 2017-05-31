@@ -7,8 +7,8 @@
     "url": "???"
   },
   "scripts": {
-        "debug": "concurrently \"au run --watch\" \"wait-on http://localhost:9000  && cross-env ELECTRON_ENV=debug electron .  --enable-logging --remote-debugging-port=9222\"",
-        "develop": "concurrently \"au run --watch\" \"wait-on http://localhost:9000  && cross-env ELECTRON_ENV=debug electron . \""
+    "debug": "concurrently \"au run --watch\" \"wait-on http://localhost:9000  && cross-env ELECTRON_ENV=debug electron .  --enable-logging --remote-debugging-port=9222\"",
+    "develop": "concurrently \"au run --watch\" \"wait-on http://localhost:9000  && cross-env ELECTRON_ENV=debug electron . \""
   },
   "license": "MIT",
   "dependencies": {
@@ -20,30 +20,31 @@
     "requirejs": "^2.3.2",
     "text": "github:requirejs/text#latest",
     "font-awesome": "^4.7.0",
-    "ews-javascript-api":"^0.9.0-dev.7"
+    "ews-javascript-api": "^0.9.0-dev.7"
   },
   "peerDependencies": {},
   "devDependencies": {
+    "@types/browser-sync": "0.0.35",
+    "@types/node": "^7.0.22",
     "aurelia-cli": "0.21.0",
     "aurelia-testing": "^1.0.0-beta.2.0.1",
     "aurelia-tools": "^1.0.0",
     "browser-sync": "^2.13.0",
     "connect-history-api-fallback": "^1.2.0",
+    "event-stream": "^3.3.3",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-changed-in-place": "^2.0.3",
+    "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.0.0-alpha",
-    "gulp-notify": "^3.0.0",
+    "gulp-tslint": "^8.1.0",
+    "gulp-typescript": "^3.1.4",
     "minimatch": "^3.0.2",
     "through2": "^2.0.1",
-    "uglify-js": "^3.0.13",
-    "vinyl-fs": "^2.4.3",
-    "event-stream": "^3.3.3",
-    "gulp-typescript": "^3.1.4",
-    "gulp-tslint": "^8.1.0",
     "tslint": "^5.3.2",
     "typescript": "^2.0.0",
-    "@types/node": "^7.0.22"
+    "uglify-js": "^3.0.13",
+    "vinyl-fs": "^2.4.3"
   }
 }

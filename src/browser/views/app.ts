@@ -6,6 +6,6 @@ import { TreeModel } from "../models/TreeModel";
 export class App {
   
   constructor(){
-    //ipcRenderer.send("open");
+    ipcRenderer.send("open");
   }
 }
