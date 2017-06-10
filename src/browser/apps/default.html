@@ -1,0 +1,57 @@
+<template>
+  <require from="aurelia-kendoui-bridge/tabstrip/tabstrip"></require>
+  <require from="aurelia-kendoui-bridge/window/window"></require>
+  <require from="aurelia-kendoui-bridge/button/button"></require>
+  <require from="aurelia-kendoui-bridge/splitter/splitter"></require>
+  <require from="browser/views/MailboxTree/MailboxTree"></require>
+  <div>
+    <!--<aup-tabs tabs.bind="myTabs" tab-close.call="tabClose(tabId)"></aup-tabs>
+    <aup-tab-content>
+      <aup-tab-pane tab.bind="tab.id" repeat.for="tab of myTabs" view-model.bind="tab.tab"></aup-tab-pane>
+    </aup-tab-content>-->
+
+
+    <button click.delegate="opendlg()">open dialog</button>
+
+    <!--<div ak-splitter style="height: 100%; width: 100%;border: 0px">
+      <div id="left-pane">
+        <div class="pane-content">
+          <compose view-model="browser/views/MailboxTree/MailboxTree"></compose>
+        </div>
+      </div>
+      <div id="center-pane">
+        <div class="pane-content">
+          <compose view-model="browser/apps/options"></compose>
+        </div>
+      </div>      
+    </div>-->
+
+    <div id="window" ak-window="k-width: 400px; k-visible.bind: false; k-widget.bind: window; k-modal:true">
+      <compose view-model.bind="winVM"></compose>
+    </div>
+
+    <div id="tabstrip" ak-tabstrip="k-animation.bind: { open: { effects: 'fadeIn' }};k-widget.two-way: tabStrip">
+      <ul>
+        <li class="${tab.active:'k-selected':''" repeat.for="tab of myTabs" aria-controls="${tab.id}">
+         ${tab.label} <i show.bind="tab.canClose === undefined? true : tab.canClose" class="glyphicon glyphicon-remove-sign au-target" style="cursor: pointer;font-size:smaller" click.delegate="tabClose(tab.id)" au-target-id="27"></i></span>
+        </li>        
+      </ul>
+      <div class="k-content" id="${tab.id}" repeat.for="tab of myTabs" role="tabpanel" aria-hidden="true">
+        <compose view-model.bind="tab.tab"></compose>        
+      </div>
+    </div>
+
+    <!--<li class="au-target k-item k-state-default k-last" au-target-id="25" role="tab" aria-controls="tabstrip-3"><span class="k-loading k-complete"></span><span unselectable="on" class="k-link">
+          Options <i show.bind="tab.canClose === undefined? true : tab.canClose" class="glyphicon glyphicon-remove-sign au-target" style="cursor: pointer;font-size:smaller" click.delegate="tabClose(tab.id)" au-target-id="27"></i></span>
+        </li>-->
+
+    <!--<button>open dialog</button>
+    <div class="layout" style="width:40%;">
+      <mailbox-tree></mailbox-tree>
+    </div>
+    <div class="layout" style="width:60%;">
+      <property-table></property-table>
+
+      Icon; Name; KnownNames; Type; Value; SmartView; PropertyObject; SortName;-->
+  </div>
+</template>

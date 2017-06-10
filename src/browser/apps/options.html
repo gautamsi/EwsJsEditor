@@ -1,0 +1,123 @@
+<template>
+  <!--<require from="dist/winstrap/css/winstrap.css"></require>-->
+  <require from="dist/bootswatch/bootstrap.min.css"></require>
+  <require from="../styles/app.css"></require>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-lg-5">
+        <fieldset>
+          <legend>Miscellaneous</legend>
+          UserAgent Value: 
+          <select value.bind="settings.UserAgent.value">
+              <option value=""></option>
+              <option repeat.for="agent of userAgents" value.bind="agent">${agent}</option>
+            </select>
+          <br>
+          <input type="checkbox" checked.bind="settings.OverrideCertValidation.value">Override SSL Certificate verification</input>
+          <br>
+          <input type="checkbox" checked.bind="settings.EnableSslDetailLogging.value">Enable detailed SSL certificate log
+          output
+          </input>
+          <br>
+          <input type="checkbox" checked.bind="settings.AllowAutodiscoverRedirect.value">Allow Autodiscover redirects</input>
+          <br>
+          <input type="checkbox" checked.bind="settings.EnableScpLookups.value">Enable SCP Lookups (In-network Autodiscover)</input>
+          <br>
+          <label style="font-weight: normal">
+            SCP Autodiscover is for in-network Autodiscover.  SCP autodisocver is done first by default and if it fails then POX Autdiscover (external) is done.  Skipping SCP saves unneccesary processing when going against externernal servers (saves time). 
+          </label>
+          <br>
+          <input type="checkbox" checked.bind="settings.PreAuthenticate.value">Pre-Authenticate HTTP requests</input>
+          <div class="">
+            <input type="checkbox" checked.bind="settings.OverrideTimeout.value">Override timeout:</input>
+            <span> milliseconds : <input type="number" value.bind="settings.Timeout.value"></input></span>
+          </div>
+          <div>
+            CalendarView Size: <input type="text" value.bind="settings.CalendarViewSize.value"></input>
+          </div>
+          <div>
+            FindFolder View Size: <input type="text" value.bind="settings.FindFolderViewSize.value"></input>
+          </div>
+          <div>
+            FindItem View Size: <input type="text" value.bind="settings.FindItemViewSize.value"></input>
+          </div>
+          <div>
+            Dump Folder View Size: <input type="text" value.bind="settings.DumpFolderViewSize.value"></input>
+          </div>
+          <input type="checkbox" checked.bind="settings.OverrideTimezone.value">Use specified timezone:</input>
+          <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TimeZone: 
+          <select value.bind="settings.SelectedTimeZoneId.value" disabled.bind="!settings.OverrideTimezone.value" style="width:70%;">              
+              <option repeat.for="timeZone of timeZones" value.bind="timeZone">${timeZone}</option>
+          </select>
+          <br>
+          <input type="checkbox" checked.bind="settings.AddTimeZoneContext.value">Add TimeZoneContext (not added by default past Exchange2007_SP1). </input>
+          <br> 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TimeZone:
+          <select value.bind="settings.SelectedTimeZoneContextId.value" disabled.bind="!settings.AddTimeZoneContext.value" style="width:70%;">              
+              <option repeat.for="timeZone of timeZones" value.bind="timeZone">${timeZone}</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <legend>Logging...</legend>
+          <input type="checkbox" checked.bind="settings.ShouldSaveDebugOutput.value">Save logging output to a file </input>
+          <br> Log file path: <input type="text" value.bind="settings.DebugOutputFile.value" disabled.bind="!settings.ShouldSaveDebugOutput.value" style="width: 80%"></input>
+        </fieldset>
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <fieldset>
+          <legend><i class="glyphicon glyphicon-off"></i> Set Web Proxy Settings</legend>
+          <input type="radio" name="proxy" model.bind="false" checked.bind="settings.SpecifyProxySettings.value">Don't Override Proxy Settings</input>
+          <br>
+          <input type="radio" name="proxy" model.bind="true" checked.bind="settings.SpecifyProxySettings.value">Specify Proxy Settings</input>
+          <div>
+            Proxy Server: <input type="text" value.bind="settings.ProxyServerName.value" disabled.bind="!settings.SpecifyProxySettings.value"></input>
+          </div>
+          <div>
+            Proxy Port: <input type="text" value.bind="settings.ProxyServerPort.value" disabled.bind="!settings.SpecifyProxySettings.value"></input>
+          </div>
+          <input type="checkbox" checked.bind="settings.BypassProxyForLocalAddress.value" disabled.bind="!settings.SpecifyProxySettings.value">BypassProxy For Local Address </input>
+          <br>
+          <input type="checkbox" checked.bind="settings.OverrideProxyCredentials.value" disabled.bind="!settings.SpecifyProxySettings.value">Override Proxy Server Credentials
+          </input>
+          <br>
+          <div>
+            User: <input type="text" value.bind="settings.ProxyServerUser.value" disabled.bind="!settings.SpecifyProxySettings.value"></input>
+          </div>
+          <div>
+            Password: <input type="text" value.bind="settings.ProxyServerPassword.value" disabled.bind="!settings.SpecifyProxySettings.value"></input>
+          </div>
+          <div>
+            Domain: <input type="text" value.bind="settings.ProxyServerDomain.value" disabled.bind="!settings.SpecifyProxySettings.value"></input>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Additional Headers</legend>
+          <table>
+            <tr>
+              <th></th>
+              <th>Header</th>
+              <th>Value</th>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked.bind="settings.EnableAdditionalHeader1.value"></td>
+              <td><input type="text" value.bind="settings.AdditionalHeader1.value" disabled.bind="!settings.EnableAdditionalHeader1.value"></td>
+              <td><input type="text" value.bind="settings.AdditionalHeaderValue1.value" disabled.bind="!settings.EnableAdditionalHeader1.value"></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked.bind="settings.EnableAdditionalHeader2.value"></td>
+              <td><input type="text" value.bind="settings.AdditionalHeader2.value"  disabled.bind="!settings.EnableAdditionalHeader2.value"></td>
+              <td><input type="text" value.bind="settings.AdditionalHeaderValue2.value"  disabled.bind="!settings.EnableAdditionalHeader2.value"></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" checked.bind="settings.EnableAdditionalHeader3.value"></td>
+              <td><input type="text" value.bind="settings.AdditionalHeader3.value"  disabled.bind="!settings.EnableAdditionalHeader3.value"></td>
+              <td><input type="text" value.bind="settings.AdditionalHeaderValue3.value"  disabled.bind="!settings.EnableAdditionalHeader3.value"></td>
+            </tr>
+          </table>
+        </fieldset>
+        <!--<button class="btn btn-default">OK</button>
+        <button class="btn">Cancel</button>-->
+      </div>
+    </div>
+  </div>
+</template>

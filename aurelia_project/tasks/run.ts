@@ -18,12 +18,14 @@ let serve = gulp.series(
   build,
   done => {
     browserSync({
+      ghostMode:false,
       online: false,
       open: false,
       port: 9000,
       logLevel: 'silent',
       server: {
-        baseDir: [project.platform.output],
+        //baseDir: [project.platform.output],
+        baseDir: [project.platform.output + "/../"],
         middleware: [historyApiFallback(), function(req, res, next) {
           res.setHeader('Access-Control-Allow-Origin', '*');
           next();

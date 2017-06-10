@@ -36,6 +36,7 @@ function buildTypeScript() {
     .pipe(sourcemaps.init())
     .pipe(typescriptCompiler())
     .pipe(sourcemaps.write({ sourceRoot: 'src' }))
+    //.pipe(gulp.dest("src/browser"))
     .pipe(build.bundle());
 }
 

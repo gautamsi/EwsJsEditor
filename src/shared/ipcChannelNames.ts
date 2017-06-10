@@ -1,1 +1,0 @@
-export type ipcChannelNames = "mailboxNodeSelected" | "getDataForMailboxNode" | "getDataForMailboxNodeCompleted";

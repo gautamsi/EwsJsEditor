@@ -1,0 +1,111 @@
+<template>
+  <require from="grd/grd.css"></require>
+  <require from="aurelia-kendoui-bridge/window/window"></require>
+  <require from="aurelia-kendoui-bridge/button/button"></require>
+
+  <div class="Grid new-exch">
+    <div id="left" class="Cell -7of12">
+      <div>
+        <label>Use Autodiscover or use Exchange Web Service URL directly:</label>
+        <br>
+        <label><input type="radio" name="autod" model.bind="true" checked.bind="settings.useAutodisocver"> Autodiscover Email: </label>
+        <input type="text" value.bind="settings.autodEmail" disabled.bind="!settings.useAutodisocver"> <button ak-button disabled.bind="!settings.useAutodisocver">Default</button>
+        <br>
+        <div style="text-align:center"><label>Target mailbox.  Example: myuser@contoso.com</label></div>
+        <label><input type="radio" name="autod" model.bind="false" checked.bind="settings.useAutodisocver"> Service URL: </label>
+        <input type="text" value.bind="settings.serviceUrl" disabled.bind="settings.useAutodisocver"> <button ak-button disabled.bind="settings.useAutodisocver">365 Default</button>
+        <div style="text-align:center"><label>Example: https://mail.contoso.com/EWS/Exchange.asmx</label></div>
+        <label>Note: For Autodiscover against out of network servers such as Exchange Online, you should set disable SCP Autodiscover so that only POX will be used.  You can do this from the Global Options window.</label>
+      </div>
+      <div>
+        EWS Schema Version: <select value.bind="settings.exchangeVersion">
+          <option value.bind="version" repeat.for="version of settings.exchangeVersions">${version}</option>
+        </select>
+        <br> Set the version of the EWS Schema to use. This is not the same thing as the Exchange version.
+      </div>
+      <div>
+        <label><input type="radio" name="credential" value="default" checked.bind="settings.credentialType"> Use Default Credential </label>
+        <br>
+        <label><input type="radio" name="credential" value="given" checked.bind="settings.credentialType"> Use the following credentials instead of the default Windows credentials. </label>
+        <table style="margin-left:22px">
+          <tr>
+            <td>User name:</td>
+            <td><input type="text" value.bind="settings.userName" disabled.bind="settings.credentialType !== 'given'"></td>
+            <td rowspan="3" style="vertical-align: top"><button ak-button disabled.bind="settings.credentialType !== 'given'">Default</button></td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td><input type="password" value.bind="settings.password" disabled.bind="settings.credentialType !== 'given'"></td>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td><input type="text" value.bind="settings.domain" disabled.bind="settings.credentialType !== 'given'"></td>
+          </tr>
+        </table>
+        <div style="margin-left:22px">Use credentials of mailbox being accessed or the those of the EWS Impersonation account.
+          <br> Suggestion: Use UPN/SMTP address and no domain for Outlook 365.</div>
+
+        <label><input type="radio" name="credential" value="oauth"  checked.bind="settings.credentialType"> Use oAuth (Registration must have been completed first)</label>
+        <table style="margin-left:22px">
+          <tr>
+            <td>Redirect URI:</td>
+            <td><input type="text" value.bind="settings.oauthRedirectUri" disabled.bind="settings.credentialType !== 'oauth'"></td>
+          </tr>
+          <tr>
+            <td>Client App ID: </td>
+            <td><input type="text" value.bind="settings.oauthClientAppId" disabled.bind="settings.credentialType !== 'oauth'"></td>
+          </tr>
+          <tr>
+            <td>Server Name :</td>
+            <td><input type="text" value.bind="settings.oauthServerName" disabled.bind="settings.credentialType !== 'oauth'"></td>
+          </tr>
+          <tr>
+            <td>Auth Authority: </td>
+            <td><input type="text" value.bind="settings.oauthAuthAuthority" disabled.bind="settings.credentialType !== 'oauth'"></td>
+          </tr>
+        </table>
+        <br>
+      </div>
+    </div>
+    <div id="right" class="Cell -5of12">
+      <div>
+        <label><input type="checkbox" checked.bind="settings.useImpersonation"> Check if using EWS Impersonation. </label>
+        <div style="margin-left:22px">
+          Id Type: <select value.bind="settings.impersonationType" disabled.bind="!settings.useImpersonation">
+            <option value="PrincipalName">PrincipalName</option>
+            <option value="ID">ID</option>
+            <option value="SmtpAddress">SmtpAddress</option>
+            </select>
+          <br> Id: <input type="text" value.bind="settings.impersonationId"  disabled.bind="!settings.useImpersonation">
+        </div>
+        Set to mailbox being accessed using EWS Impersonation.
+      </div>
+      <div>
+        <label><input type="checkbox" checked.bind="settings.setXAnchorMailboxHeader"> Set X-AnchorMailox header. </label>
+        <div style="margin-left:22px">
+          SMTP: <input type="text" value.bind="settings.xAnchorHeaderSMTP" disabled.bind="!settings.setXAnchorMailboxHeader">
+        </div>
+        Normaly set to the target mailbox when using Impersonation and when accessing a public folder.
+      </div>
+      <div>
+        <label><input type="checkbox" checked.bind="settings.setXPublicFolderMailboxHeader"> Set X-PublicFolderMailbox header. </label>
+        <div style="margin-left:22px">
+          SMTP: <input type="text" value.bind="settings.xPublicFolderHeaderSMTP" disabled.bind="!settings.setXPublicFolderMailboxHeader">
+        </div>
+        Set when accessing a public folder.
+      </div>
+      <div style="border:0px; padding:0px">
+        <button ak-button click.delegate="openOptions()">Global Options</button>
+      </div>
+      <div style="border:0px; position: absolute; bottom: 0px; right: 0px">
+        <button ak-button click.delegate="ok()">OK</button>
+        <button ak-button click.delegate="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div id="window" ak-window="k-visible.bind: false; k-widget.bind: window; k-modal:true">
+    <compose view-model.bind="optionsVM"></compose>
+  </div>
+
+
+</template>

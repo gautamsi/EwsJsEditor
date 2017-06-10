@@ -12,8 +12,10 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "lib": ["es2017", "dom"],
-    "allowJs": false,
-    "outDir": "dist"
+    "allowUnreachableCode": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "noEmit": true
   },
   "exclude": [
     "src/browser/",

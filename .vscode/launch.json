@@ -14,8 +14,11 @@
             },
             "program": "${workspaceRoot}/index.js",
             "protocol": "legacy",
+            "args": [
+                "--dev"
+            ],
             "env": {
-                "ELECTRON_ENV" :"debug"
+                "XELECTRON_ENV" :"debug"
             }
         },
         {

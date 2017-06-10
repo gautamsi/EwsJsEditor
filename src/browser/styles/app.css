@@ -10,14 +10,14 @@ div.layout{
 }
 
 div.treenode {
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 .treenode .collapse {
     visibility: collapse
 }
-.treenode .fa {
-    margin-left: -10px;
+.treenode .glyphicon {
+    margin-left: -16px;
     cursor: pointer;
 }
 
@@ -29,4 +29,39 @@ div.treenode {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+fieldset {
+    width: 100%;
+}
+span.table-cell, span.table-cell+select {
+    display: table-cell
+}
+span.table-cell+select {
+    width: 80%;    
+}
+
+
+div.new-exch {
+    height: 100%;
+    margin: 0px
+}
+
+div.new-exch>div {
+    height: 100%;
+    margin: 0px
+}
+
+
+div.new-exch>div>div{
+    border: 1px solid black;
+    height: auto;
+    margin: 4px 5px 4px 10px;
+    padding: 2px 10px;
+}
+div.new-exch>div#right>div{
+    border: 1px solid black;
+    height: auto;
+    margin: 4px 10px 4px 5px;
+    padding: 2px 10px;
 }

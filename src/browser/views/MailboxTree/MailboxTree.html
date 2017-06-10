@@ -1,5 +1,19 @@
-<<template>
-<tree-view tree-model.bind="treeModel" selected-tree-node.two-way="selectedTreeNode">
+<template>
+<require from="aurelia-kendoui-bridge/splitter/splitter"></require>
+<require from="../PropertyTable/PropertyTable"></require>
+<div ak-splitter style="height: 100%; width: 100%;border: 0px">
+      <div id="left-pane">
+        <div class="pane-content">
+          <tree-view tree-model.bind="treeModel" selected-tree-node.two-way="selectedTreeNode">
+        </div>
+      </div>
+      <div id="center-pane">
+        <div class="pane-content">
+          <property-table></property-table>
+        </div>
+      </div>      
+    </div>
+
 
 </tree-view>
 </template>

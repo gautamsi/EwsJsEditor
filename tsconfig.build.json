@@ -1,23 +1,25 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src",
     "inlineSourceMap": true,
     "target": "es6",
-    "module": "amd",
+    "module": "commonjs",
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
-    "allowUnreachableCode": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "lib": ["es2017", "dom"],
-    "allowJs": false
+    "allowJs": false,
+    "watch": true
   },
   "exclude": [
-    "src/browser",
+    "src/browser/",
     "node_modules",
-    "aurelia_project"
-    //"./index.js"
+    "aurelia_project",
+    "./index.js",
+    "src/environment.ts"
   ]  
 }

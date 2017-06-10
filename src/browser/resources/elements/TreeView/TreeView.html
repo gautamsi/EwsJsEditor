@@ -1,7 +1,7 @@
 <template>
     <div class="treenode">
         <div >
-            <i if.bind="hasChild" class="fa fa-caret-right ${treeModel.isOpen? 'rotate-45' : ''} ${treeModel.canClose ? '' : 'collapse'}" click.delegate="treeModel.isOpen = !treeModel.isOpen"></i>
+            <i if.bind="hasChild" class="glyphicon glyphicon-${treeModel.isOpen? 'minus' : 'plus'}-sign ${treeModel.isOpen? 'xrotate-45' : ''} ${treeModel.canClose ? '' : 'collapse'}" click.delegate="treeModel.isOpen = !treeModel.isOpen"></i>
             <span class="${hasChild? 'with-child' : ''} ${selectedTreeNode === treeModel? 'selected' : ''}" click.delegate="selectNode(treeModel)">${treeModel.display}</span>
         </div>
         <tree-view class="${treeModel.isOpen? '': 'collapse'}" repeat.for="item of treeModel.childrens" tree-model.bind="item" selected-tree-node.two-way="selectedTreeNode">
